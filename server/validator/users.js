@@ -24,3 +24,46 @@ exports.validateUpdateUser = (data) => {
   });
   return schema.validate(data, { abortEarly: false });
 };
+
+exports.validateGetAllUsersQuery = (payload) => {
+  const getAllQuerySchema = Joi.object({
+    page: Joi.number().integer().min(1).optional(),
+    limit: Joi.number().integer().min(1).optional(),
+    search: Joi.string().optional(),
+    name: Joi.string().optional(),
+    email: Joi.string().optional(),
+    mobile: Joi.alternatives().try(Joi.number(), Joi.string()).optional(),
+    address: Joi.string().optional(),
+    role: Joi.string().optional(),
+    loginType: Joi.string().optional(),
+    isEmailVerified: Joi.alternatives()
+      .try(Joi.boolean(), Joi.string())
+      .optional(),
+    isMobileVerified: Joi.alternatives()
+      .try(Joi.boolean(), Joi.string())
+      .optional(),
+    isSignUpCompleted: Joi.alternatives()
+      .try(Joi.boolean(), Joi.string())
+      .optional(),
+    isOnBoardingCompleted: Joi.alternatives()
+      .try(Joi.boolean(), Joi.string())
+      .optional(),
+    isLoggedIn: Joi.alternatives().try(Joi.boolean(), Joi.string()).optional(),
+    isOnline: Joi.alternatives().try(Joi.boolean(), Joi.string()).optional(),
+    isActive: Joi.alternatives().try(Joi.boolean(), Joi.string()).optional(),
+    fromDate: Joi.date().iso().optional(),
+    toDate: Joi.date().iso().optional(),
+    sortBy: Joi.string().valid(
+      "createdAt",
+      "updatedAt",
+      "name",
+      "email",
+      "mobile",
+      "role",
+      "loginType",
+      "isActive",
+    ),
+    sortOrder: Joi.string().valid("asc", "desc").optional(),
+  });
+  return getAllQuerySchema.validate(payload, { abortEarly: false });
+};

@@ -1,0 +1,757 @@
+{
+  "info": {
+    "_postman_id": "485ff6da-9424-4a16-bb4b-1f0b707bd682",
+    "name": "Kera-Cabs",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "18198174",
+    "_collection_link": "https://go.postman.co/collection/18198174-485ff6da-9424-4a16-bb4b-1f0b707bd682?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "getUser",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{KeraAdminToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{KeraBaseUrl}}users/get",
+              "host": ["{{KeraBaseUrl}}users"],
+              "path": ["get"],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "68c32f6dc54e49c1ce5b0c47",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "updateUser",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{KeraAdminToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "Kera Cabs Admin",
+                  "type": "text",
+                  "uuid": "adcdff3d-886f-40a1-9cbd-009d5e393cb9"
+                },
+                {
+                  "key": "address",
+                  "value": "",
+                  "type": "text",
+                  "uuid": "af53c97f-540e-49a0-b916-c1bf105fc7d1",
+                  "disabled": true
+                },
+                {
+                  "key": "email",
+                  "value": "admin@gmail.com",
+                  "type": "text",
+                  "uuid": "e0dd9786-344b-4acc-a927-ce46e0e7dd77",
+                  "disabled": true
+                },
+                {
+                  "key": "mobile",
+                  "value": "8210574144",
+                  "type": "text",
+                  "uuid": "a8a4f26b-025e-4252-99b0-ca35cc8e8866",
+                  "disabled": true
+                },
+                {
+                  "key": "dob",
+                  "value": "2000-10-25",
+                  "type": "text",
+                  "uuid": "feba67e5-29cc-4125-8872-232d8a00662e",
+                  "disabled": true
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "uuid": "414c75a3-6d75-43ab-98b6-ac83a7d360eb",
+                  "src": "/C:/Users/acar/OneDrive/Pictures/Saved Pictures/Screenshots/Screenshot 2026-02-08 233138.png"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{KeraBaseUrl}}users/update",
+              "host": ["{{KeraBaseUrl}}users"],
+              "path": ["update"],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": null,
+                  "type": "text",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "getAllUsers",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{KeraAdminToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{KeraBaseUrl}}users/getAll",
+              "host": ["{{KeraBaseUrl}}users"],
+              "path": ["getAll"],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "diwali",
+                  "disabled": true
+                },
+                {
+                  "key": "isActive",
+                  "value": "false",
+                  "disabled": true
+                },
+                {
+                  "key": "fromDate",
+                  "value": "2025-01-01",
+                  "disabled": true
+                },
+                {
+                  "key": "toDate",
+                  "value": "2025-12-31",
+                  "disabled": true
+                },
+                {
+                  "key": "sortBy",
+                  "value": "createdAt",
+                  "disabled": true
+                },
+                {
+                  "key": "sortOrder",
+                  "value": "desc",
+                  "description": "\"asc\" for ascending order, \"desc\" for decreasing order",
+                  "disabled": true
+                },
+                {
+                  "key": "page",
+                  "value": "1",
+                  "disabled": true
+                },
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "deleteUser",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{KeraAdminToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{KeraBaseUrl}}users/delete/69a56e077dc9812097b3984c",
+              "host": ["{{KeraBaseUrl}}users"],
+              "path": ["delete", "69a56e077dc9812097b3984c"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Categories",
+      "item": [
+        {
+          "name": "createCategory",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{KeraAdminToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "XUV",
+                  "type": "text",
+                  "uuid": "1728835c-36ba-4284-a67d-752616bff315"
+                },
+                {
+                  "key": "description",
+                  "value": "model 2027",
+                  "type": "text",
+                  "uuid": "69c4a789-b835-4fa0-b01f-77537106eb5b"
+                },
+                {
+                  "key": "image",
+                  "description": "optional by default it take default image",
+                  "type": "text",
+                  "uuid": "1138d99b-28f5-4ed0-97f0-ed938db51bd1",
+                  "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "isActive",
+                  "value": "false",
+                  "description": "optional by default it take true",
+                  "type": "text",
+                  "uuid": "c1328ece-1ad8-4036-a715-a6bfc4156ab1",
+                  "disabled": true
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{KeraBaseUrl}}categories/create",
+              "host": ["{{KeraBaseUrl}}categories"],
+              "path": ["create"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "getCategory",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{KeraAdminToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{KeraBaseUrl}}categories/get/69244469f12f9c43bb147408",
+              "host": ["{{KeraBaseUrl}}categories"],
+              "path": ["get", "69244469f12f9c43bb147408"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "getAllCategories",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{KeraAdminToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{KeraBaseUrl}}categories/getAll",
+              "host": ["{{KeraBaseUrl}}categories"],
+              "path": ["getAll"],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "diwali",
+                  "disabled": true
+                },
+                {
+                  "key": "isActive",
+                  "value": "false",
+                  "disabled": true
+                },
+                {
+                  "key": "fromDate",
+                  "value": "2025-01-01",
+                  "disabled": true
+                },
+                {
+                  "key": "toDate",
+                  "value": "2025-12-31",
+                  "disabled": true
+                },
+                {
+                  "key": "sortBy",
+                  "value": "createdAt",
+                  "disabled": true
+                },
+                {
+                  "key": "sortOrder",
+                  "value": "desc",
+                  "description": "\"asc\" for ascending order, \"desc\" for decreasing order",
+                  "disabled": true
+                },
+                {
+                  "key": "page",
+                  "value": "1",
+                  "disabled": true
+                },
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "updateCategory",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{KeraAdminToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "Drama",
+                  "type": "text",
+                  "uuid": "bb954c23-bd50-44aa-88ce-5859b436eaa3"
+                },
+                {
+                  "key": "description",
+                  "value": "hop hop",
+                  "type": "text",
+                  "uuid": "f59d9897-46f2-406e-b72f-45a51a8a59c8",
+                  "disabled": true
+                },
+                {
+                  "key": "isActive",
+                  "value": "true",
+                  "description": "work as toggle if passed in body",
+                  "type": "text",
+                  "uuid": "20a71b2c-4793-49b9-8173-039a83f7c7b6",
+                  "disabled": true
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "uuid": "8529e30a-33eb-46ee-926e-7062239fffba",
+                  "src": "/C:/Users/acar/OneDrive/Pictures/Saved Pictures/Screenshots/Screenshot 2025-10-05 015005.png",
+                  "disabled": true
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{KeraBaseUrl}}categories/update/69244469f12f9c43bb147408",
+              "host": ["{{KeraBaseUrl}}categories"],
+              "path": ["update", "69244469f12f9c43bb147408"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "deleteCategory",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{KeraAdminToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{KeraBaseUrl}}categories/delete/69244469f12f9c43bb147408",
+              "host": ["{{KeraBaseUrl}}categories"],
+              "path": ["delete", "69244469f12f9c43bb147408"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "register",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"devashish\",\r\n    \"email\": \"user1.keracabs@gmail.com\",\r\n    // \"mobile\": 8889524382, // email or mobile any one of them is required , if both so optional \r\n    \"password\": \"123456\",\r\n    \"role\": \"user\", // role is optonal by default it taking user\r\n    \"fcmToken\": \"dkcdkmdedmeidcwd\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{KeraBaseUrl}}auth/register",
+              "host": ["{{KeraBaseUrl}}auth"],
+              "path": ["register"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "loginWithPassword",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"type\": \"email\", // type is required for email login == email , mobile login == mobile\r\n    \"email\": \"admin.keracabs@gmail.com\",\r\n    // \"mobile\": \"8889524382\",\r\n    \"password\": \"123456\",\r\n    \"role\": \"admin\", // role is optonal by default it taking user\r\n    \"fcmToken\": \"dkcdkmdedmeidcwd\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{KeraBaseUrl}}auth/login",
+              "host": ["{{KeraBaseUrl}}auth"],
+              "path": ["login"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Companies",
+      "item": [
+        {
+          "name": "Create Company (Admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{KeraAdminToken}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "suzuki",
+                  "type": "text",
+                  "uuid": "97a273ac-4464-43c6-8484-aeef4883b8ae"
+                },
+                {
+                  "key": "description",
+                  "value": "model 2033",
+                  "type": "text",
+                  "uuid": "6c819f18-7336-4000-9c9c-c0f32003f32b"
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "uuid": "e737c3ab-a32a-45f7-86ce-a4e1c64a82ca",
+                  "value": null,
+                  "disabled": true
+                },
+                {
+                  "key": "isActive",
+                  "value": "true",
+                  "type": "text",
+                  "uuid": "4a2bd6bb-f858-4dba-a6d5-9c93a4410d5d",
+                  "disabled": true
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{KeraBaseUrl}}companies/create",
+              "host": ["{{KeraBaseUrl}}companies"],
+              "path": ["create"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Companies",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{KeraAdminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{KeraBaseUrl}}companies/getAll",
+              "host": ["{{KeraBaseUrl}}companies"],
+              "path": ["getAll"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Company",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{KeraAdminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{KeraBaseUrl}}companies/get/69a573498bf3759cc9485472",
+              "host": ["{{KeraBaseUrl}}companies"],
+              "path": ["get", "69a573498bf3759cc9485472"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Company (Admin)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{KeraAdminToken}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "type": "file",
+                  "uuid": "d73a5e41-558f-448c-a045-59614e660fcd",
+                  "src": "/C:/Users/acar/OneDrive/Pictures/Saved Pictures/Screenshots/Screenshot 2026-02-27 003959.png"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{KeraBaseUrl}}companies/update/69a573498bf3759cc9485472",
+              "host": ["{{KeraBaseUrl}}companies"],
+              "path": ["update", "69a573498bf3759cc9485472"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Company (Admin)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{KeraAdminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{KeraBaseUrl}}companies/delete/69a573498bf3759cc9485478",
+              "host": ["{{KeraBaseUrl}}companies"],
+              "path": ["delete", "69a573498bf3759cc9485478"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Vehicles",
+      "item": [
+        {
+          "name": "Create Vehicle (Admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{KeraAdminToken}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "THar",
+                  "type": "text",
+                  "uuid": "baf11d95-1130-4fdb-8503-b34c95ab7cdd"
+                },
+                {
+                  "key": "description",
+                  "value": "mahindra top model",
+                  "type": "text",
+                  "uuid": "5b12458a-ebe2-449c-864e-fef28ec1ae14"
+                },
+                {
+                  "key": "categoryId",
+                  "value": "69a56450a9d346854e654e89",
+                  "type": "text",
+                  "uuid": "750b4298-4aab-44a3-8ef8-19b9fd564f14"
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "uuid": "1e200fc0-5470-4eef-9936-7d84d985ce3f",
+                  "src": "/C:/Users/acar/OneDrive/Pictures/Saved Pictures/Screenshots/Screenshot 2026-02-26 141511.png",
+                  "disabled": true
+                },
+                {
+                  "key": "isActive",
+                  "value": "",
+                  "type": "text",
+                  "uuid": "ded8ad6f-8dc3-4e92-b916-f3153feba31b",
+                  "disabled": true
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{KeraBaseUrl}}vehicles/create",
+              "host": ["{{KeraBaseUrl}}vehicles"],
+              "path": ["create"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Vehicles",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{KeraAdminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{KeraBaseUrl}}vehicles/getAll",
+              "host": ["{{KeraBaseUrl}}vehicles"],
+              "path": ["getAll"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Vehicle",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{KeraAdminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{KeraBaseUrl}}vehicles/get/69a574d38bf3759cc9485482",
+              "host": ["{{KeraBaseUrl}}vehicles"],
+              "path": ["get", "69a574d38bf3759cc9485482"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Vehicle (Admin)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{KeraAdminToken}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "type": "file",
+                  "uuid": "6460561f-f632-40a6-84b1-f6f583d9fca0",
+                  "src": "/C:/Users/acar/OneDrive/Pictures/Saved Pictures/Screenshots/Screenshot 2026-02-27 153601.png"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{KeraBaseUrl}}vehicles/update/69a574d38bf3759cc9485482",
+              "host": ["{{KeraBaseUrl}}vehicles"],
+              "path": ["update", "69a574d38bf3759cc9485482"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Vehicle (Admin)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{KeraAdminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{KeraBaseUrl}}vehicles/delete/69a574d38bf3759cc94854829",
+              "host": ["{{KeraBaseUrl}}vehicles"],
+              "path": ["delete", "69a574d38bf3759cc94854829"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [""]
+      }
+    }
+  ]
+}

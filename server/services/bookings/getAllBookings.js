@@ -14,7 +14,7 @@ exports.getAllBookings = async (query) => {
     page,
     limit,
     companyId,
-    vehicleId,
+    categoryId,
     userId,
     status,
     minPrice,
@@ -38,7 +38,7 @@ exports.getAllBookings = async (query) => {
   const match = { isDeleted: false };
 
   if (companyId) match.companyId = new mongoose.Types.ObjectId(companyId);
-  if (vehicleId) match.vehicleId = new mongoose.Types.ObjectId(vehicleId);
+  if (categoryId) match.categoryId = new mongoose.Types.ObjectId(categoryId);
   if (userId) match.userId = new mongoose.Types.ObjectId(userId);
   if (status) match.status = status;
 
@@ -93,13 +93,13 @@ exports.getAllBookings = async (query) => {
     { $unwind: { path: "$company", preserveNullAndEmptyArrays: true } },
     {
       $lookup: {
-        from: "vehicles",
-        localField: "vehicleId",
+        from: "categories",
+        localField: "categoryId",
         foreignField: "_id",
-        as: "vehicle",
+        as: "category",
       },
     },
-    { $unwind: { path: "$vehicle", preserveNullAndEmptyArrays: true } },
+    { $unwind: { path: "$category", preserveNullAndEmptyArrays: true } },
     {
       $lookup: {
         from: "users",

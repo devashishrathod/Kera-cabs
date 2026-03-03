@@ -8,9 +8,9 @@ const bookingSchema = new mongoose.Schema(
       ref: "Company",
       required: true,
     },
-    vehicleId: {
+    categoryId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Vehicle",
+      ref: "Category",
       required: true,
     },
     userId: { ...userField, required: true },

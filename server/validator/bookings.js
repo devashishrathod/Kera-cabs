@@ -8,8 +8,8 @@ exports.validateCreateBooking = (data) => {
     companyId: objectId().required().messages({
       "any.invalid": "Invalid companyId format",
     }),
-    vehicleId: objectId().required().messages({
-      "any.invalid": "Invalid vehicleId format",
+    categoryId: objectId().required().messages({
+      "any.invalid": "Invalid categoryId format",
     }),
     userId: objectId().required().messages({
       "any.invalid": "Invalid userId format",
@@ -29,8 +29,8 @@ exports.validateUpdateBooking = (data) => {
     companyId: objectId().optional().messages({
       "any.invalid": "Invalid companyId format",
     }),
-    vehicleId: objectId().optional().messages({
-      "any.invalid": "Invalid vehicleId format",
+    categoryId: objectId().optional().messages({
+      "any.invalid": "Invalid categoryId format",
     }),
     userId: objectId().optional().messages({
       "any.invalid": "Invalid userId format",
@@ -52,7 +52,7 @@ exports.validateGetAllBookingsQuery = (payload) => {
     limit: Joi.number().integer().min(1).optional(),
 
     companyId: objectId().optional(),
-    vehicleId: objectId().optional(),
+    categoryId: objectId().optional(),
     userId: objectId().optional(),
     status: Joi.string()
       .valid(...STATUS)

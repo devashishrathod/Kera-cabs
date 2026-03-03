@@ -5,7 +5,7 @@ exports.getBookingById = async (id) => {
   validateObjectId(id, "Booking Id");
   const booking = await Booking.findOne({ _id: id, isDeleted: false })
     .populate("companyId")
-    .populate("vehicleId")
+    .populate("categoryId")
     .populate("userId");
 
   if (!booking) throwError(404, "Booking not found");

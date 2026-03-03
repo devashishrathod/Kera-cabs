@@ -1,6 +1,6 @@
 const Booking = require("../../models/Booking");
 const Company = require("../../models/Company");
-const Vehicle = require("../../models/Vehicle");
+const Category = require("../../models/Category");
 const User = require("../../models/User");
 const { throwError, validateObjectId } = require("../../utils");
 
@@ -23,18 +23,21 @@ const diffDays = (start, end) => {
 };
 
 exports.createBooking = async (payload) => {
-  let { companyId, vehicleId, userId, startDate, endDate, status, price } =
+  let { companyId, categoryId, userId, startDate, endDate, status, price } =
     payload;
 
   validateObjectId(companyId, "Company Id");
-  validateObjectId(vehicleId, "Vehicle Id");
+  validateObjectId(categoryId, "Category Id");
   validateObjectId(userId, "User Id");
 
   const company = await Company.findOne({ _id: companyId, isDeleted: false });
   if (!company) throwError(404, "Company not found");
 
-  const vehicle = await Vehicle.findOne({ _id: vehicleId, isDeleted: false });
-  if (!vehicle) throwError(404, "Vehicle not found");
+  const category = await Category.findOne({
+    _id: categoryId,
+    isDeleted: false,
+  });
+  if (!category) throwError(404, "Category not found");
 
   const user = await User.findOne({ _id: userId, isDeleted: false });
   if (!user) throwError(404, "User not found");
@@ -78,7 +81,7 @@ exports.createBooking = async (payload) => {
 
   return await Booking.create({
     companyId,
-    vehicleId,
+    categoryId,
     userId,
     startDate: start,
     endDate: end,

@@ -14,6 +14,7 @@ const bookingSchema = new mongoose.Schema(
       required: true,
     },
     userId: { ...userField, required: true },
+    bookedBy: { ...userField, required: true },
     startDate: { type: Date, required: true },
     endDate: { type: Date, required: true },
     status: {

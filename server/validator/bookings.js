@@ -54,6 +54,7 @@ exports.validateGetAllBookingsQuery = (payload) => {
     companyId: objectId().optional(),
     categoryId: objectId().optional(),
     userId: objectId().optional(),
+    bookedBy: objectId().optional(),
     status: Joi.string()
       .valid(...STATUS)
       .optional(),

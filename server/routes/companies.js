@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { isAdmin, verifyJwtToken } = require("../middlewares");
+const { isAdminOrStaff, verifyJwtToken } = require("../middlewares");
 const {
   createCompany,
   getAllCompanies,
@@ -10,10 +10,10 @@ const {
   deleteCompany,
 } = require("../controllers/companies");
 
-router.post("/create", isAdmin, createCompany);
-router.get("/getAll", verifyJwtToken, getAllCompanies);
-router.get("/get/:id", verifyJwtToken, getCompany);
-router.put("/update/:id", isAdmin, updateCompany);
-router.delete("/delete/:id", isAdmin, deleteCompany);
+router.post("/create", isAdminOrStaff, createCompany);
+router.get("/getAll", isAdminOrStaff, getAllCompanies);
+router.get("/get/:id", isAdminOrStaff, getCompany);
+router.put("/update/:id", isAdminOrStaff, updateCompany);
+router.delete("/delete/:id", isAdminOrStaff, deleteCompany);
 
 module.exports = router;

@@ -7,11 +7,11 @@ const {
   getAllUsers,
   deleteUser,
 } = require("../controllers/users");
-const { verifyJwtToken, isAdmin } = require("../middlewares");
+const { verifyJwtToken, isAdminOrStaff } = require("../middlewares");
 
-router.get("/get", verifyJwtToken, getUser);
-router.get("/getAll", verifyJwtToken, getAllUsers);
-router.put("/update", verifyJwtToken, updateUser);
-router.delete("/delete/:id", isAdmin, deleteUser);
+router.get("/get", isAdminOrStaff, getUser);
+router.get("/getAll", isAdminOrStaff, getAllUsers);
+router.put("/update", isAdminOrStaff, updateUser);
+router.delete("/delete/:id", isAdminOrStaff, deleteUser);
 
 module.exports = router;

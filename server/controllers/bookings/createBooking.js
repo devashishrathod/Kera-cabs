@@ -10,6 +10,6 @@ const { validateCreateBooking } = require("../../validator/bookings");
 exports.createBooking = asyncWrapper(async (req, res) => {
   const { error } = validateCreateBooking(req.body);
   if (error) throwError(422, cleanJoiError(error));
-  const booking = await createBooking(req.body);
+  const booking = await createBooking(req.body, req.userId);
   return sendSuccess(res, 201, "Booking created successfully", booking);
 });

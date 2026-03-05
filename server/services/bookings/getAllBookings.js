@@ -16,6 +16,7 @@ exports.getAllBookings = async (query) => {
     companyId,
     categoryId,
     userId,
+    bookedBy,
     status,
     minPrice,
     maxPrice,
@@ -40,6 +41,7 @@ exports.getAllBookings = async (query) => {
   if (companyId) match.companyId = new mongoose.Types.ObjectId(companyId);
   if (categoryId) match.categoryId = new mongoose.Types.ObjectId(categoryId);
   if (userId) match.userId = new mongoose.Types.ObjectId(userId);
+  if (bookedBy) match.bookedBy = new mongoose.Types.ObjectId(bookedBy);
   if (status) match.status = status;
 
   if (minPrice || maxPrice) {
@@ -109,6 +111,15 @@ exports.getAllBookings = async (query) => {
       },
     },
     { $unwind: { path: "$user", preserveNullAndEmptyArrays: true } },
+    {
+      $lookup: {
+        from: "users",
+        localField: "bookedBy",
+        foreignField: "_id",
+        as: "bookedBy",
+      },
+    },
+    { $unwind: { path: "$bookedBy", preserveNullAndEmptyArrays: true } },
   );
 
   basePipeline.push({ $sort: sortStage });

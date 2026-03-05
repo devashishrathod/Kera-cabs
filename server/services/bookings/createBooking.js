@@ -22,13 +22,14 @@ const diffDays = (start, end) => {
   return Math.floor(ms / (1000 * 60 * 60 * 24)) + 1;
 };
 
-exports.createBooking = async (payload) => {
+exports.createBooking = async (payload, bookedByUserId) => {
   let { companyId, categoryId, userId, startDate, endDate, status, price } =
     payload;
 
   validateObjectId(companyId, "Company Id");
   validateObjectId(categoryId, "Category Id");
   validateObjectId(userId, "User Id");
+  validateObjectId(bookedByUserId, "BookedBy User Id");
 
   const company = await Company.findOne({ _id: companyId, isDeleted: false });
   if (!company) throwError(404, "Company not found");
@@ -41,6 +42,12 @@ exports.createBooking = async (payload) => {
 
   const user = await User.findOne({ _id: userId, isDeleted: false });
   if (!user) throwError(404, "User not found");
+
+  const bookedBy = await User.findOne({
+    _id: bookedByUserId,
+    isDeleted: false,
+  });
+  if (!bookedBy) throwError(404, "BookedBy user not found");
 
   const now = new Date();
   const today = normalizeStartOfDay(now);
@@ -83,6 +90,7 @@ exports.createBooking = async (payload) => {
     companyId,
     categoryId,
     userId,
+    bookedBy: bookedByUserId,
     startDate: start,
     endDate: end,
     status: status || "pending",

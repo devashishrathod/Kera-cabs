@@ -11,13 +11,16 @@ exports.login = asyncWrapper(async (req, res) => {
     if (!email) throwError(422, "Eamil is required");
     email = email?.toLowerCase();
     user = await User.findOne({ email, role, isDeleted: false }).select(
-      "+password"
+      "+password",
     );
+    if (role == ROLES.STAFF && !user.isActive) {
+      throwError(401, "Your account is not activated, Please contact admin");
+    }
     if (!user) throwError(404, "User not found with this email");
   } else {
     if (!mobile) throwError(422, "Mobile number is required");
     user = await User.findOne({ mobile, role, isDeleted: false }).select(
-      "+password"
+      "+password",
     );
     if (!user) throwError(404, "User not found with this mobile number");
   }

@@ -13,9 +13,6 @@ exports.login = asyncWrapper(async (req, res) => {
     user = await User.findOne({ email, role, isDeleted: false }).select(
       "+password",
     );
-    if (role == ROLES.STAFF && !user.isActive) {
-      throwError(401, "Your account is not activated, Please contact admin");
-    }
     if (!user) throwError(404, "User not found with this email");
   } else {
     if (!mobile) throwError(422, "Mobile number is required");
@@ -23,6 +20,9 @@ exports.login = asyncWrapper(async (req, res) => {
       "+password",
     );
     if (!user) throwError(404, "User not found with this mobile number");
+  }
+  if (user && role == ROLES.STAFF && !user.isActive) {
+    throwError(401, "Your account is not activated, Please contact admin");
   }
   const passwordMatch = await user.matchPassword(password);
   if (!passwordMatch) throwError(403, "Wrong password");

@@ -18,9 +18,37 @@ const normalizeEndOfDay = (d) => {
 };
 
 const diffDays = (start, end) => {
-  const ms =
-    normalizeStartOfDay(end).getTime() - normalizeStartOfDay(start).getTime();
-  return Math.floor(ms / (1000 * 60 * 60 * 24)) + 1;
+  const startMs = Date.UTC(
+    start.getUTCFullYear(),
+    start.getUTCMonth(),
+    start.getUTCDate(),
+  );
+  const endMs = Date.UTC(
+    end.getUTCFullYear(),
+    end.getUTCMonth(),
+    end.getUTCDate(),
+  );
+  return Math.floor((endMs - startMs) / (1000 * 60 * 60 * 24)) + 1;
+};
+
+const isYMD = (v) => typeof v === "string" && /^\d{4}-\d{2}-\d{2}$/.test(v);
+
+const localYMD = (d) => {
+  const dt = new Date(d);
+  const y = dt.getFullYear();
+  const m = String(dt.getMonth() + 1).padStart(2, "0");
+  const day = String(dt.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+};
+
+const ymdToUTCStart = (ymd) => {
+  const [y, m, d] = ymd.split("-").map(Number);
+  return new Date(Date.UTC(y, m - 1, d, 0, 0, 0, 0));
+};
+
+const ymdToUTCEnd = (ymd) => {
+  const [y, m, d] = ymd.split("-").map(Number);
+  return new Date(Date.UTC(y, m - 1, d, 23, 59, 59, 999));
 };
 
 exports.createBooking = async (payload, bookedByUserId) => {
@@ -50,21 +78,26 @@ exports.createBooking = async (payload, bookedByUserId) => {
   });
   if (!bookedBy) throwError(404, "BookedBy user not found");
 
-  const now = new Date();
-  const today = normalizeStartOfDay(now);
+  const todayYMD = localYMD(new Date());
 
-  startDate = startDate ? new Date(startDate) : today;
-  if (Number.isNaN(startDate.getTime())) throwError(422, "Invalid startDate");
+  const startYMD = startDate
+    ? isYMD(startDate)
+      ? startDate
+      : localYMD(startDate)
+    : todayYMD;
+  if (!startYMD) throwError(422, "Invalid startDate");
 
-  endDate = new Date(endDate);
-  if (Number.isNaN(endDate.getTime())) throwError(422, "Invalid endDate");
+  const endYMD = endDate
+    ? isYMD(endDate)
+      ? endDate
+      : localYMD(endDate)
+    : null;
+  if (!endYMD) throwError(422, "Invalid endDate");
 
-  const start = normalizeStartOfDay(startDate);
-  const end = normalizeEndOfDay(endDate);
+  const start = ymdToUTCStart(startYMD);
+  const end = ymdToUTCEnd(endYMD);
 
-  if (start.getTime() > today.getTime()) {
-    throwError(400, "Start date cannot be a future date");
-  }
+  if (startYMD < todayYMD) throwError(400, "Start date cannot be a past date");
 
   if (end.getTime() < start.getTime()) {
     throwError(400, "End date must be greater than or equal to start date");
@@ -72,20 +105,20 @@ exports.createBooking = async (payload, bookedByUserId) => {
 
   const noOfDays = diffDays(start, end);
 
-  const overlap = await Booking.findOne({
-    userId,
-    isDeleted: false,
-    status: { $ne: "cancelled" },
-    startDate: { $lte: end },
-    endDate: { $gte: start },
-  });
+  // const overlap = await Booking.findOne({
+  //   userId,
+  //   isDeleted: false,
+  //   status: { $ne: "cancelled" },
+  //   startDate: { $lte: end },
+  //   endDate: { $gte: start },
+  // });
 
-  if (overlap) {
-    throwError(
-      409,
-      "User already has another booking that overlaps with the selected date range",
-    );
-  }
+  // if (overlap) {
+  //   throwError(
+  //     409,
+  //     "User already has another booking that overlaps with the selected date range",
+  //   );
+  // }
 
   return await Booking.create({
     companyId,

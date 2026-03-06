@@ -3,6 +3,7 @@ const Company = require("../../models/Company");
 const Category = require("../../models/Category");
 const User = require("../../models/User");
 const { throwError, validateObjectId } = require("../../utils");
+const { BOOKING_STATUS } = require("../../constants");
 
 const normalizeStartOfDay = (d) => {
   const date = new Date(d);
@@ -93,7 +94,7 @@ exports.createBooking = async (payload, bookedByUserId) => {
     bookedBy: bookedByUserId,
     startDate: start,
     endDate: end,
-    status: status || "pending",
+    status: status || BOOKING_STATUS.PENDING,
     noOfDays,
     price,
   });

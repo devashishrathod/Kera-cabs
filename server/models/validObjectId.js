@@ -18,4 +18,5 @@ const refField = (refModel, errorLabel = refModel) =>
 module.exports = Object.freeze({
   userField: refField("User"),
   categoryField: refField("Category"),
+  companyField: refField("Company"),
 });

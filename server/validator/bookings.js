@@ -1,7 +1,6 @@
 const Joi = require("joi");
 const objectId = require("./validJoiObjectId");
-
-const STATUS = ["confirmed", "pending", "completed", "cancelled"];
+const { BOOKING_STATUS } = require("../constants");
 
 exports.validateCreateBooking = (data) => {
   const schema = Joi.object({
@@ -17,7 +16,7 @@ exports.validateCreateBooking = (data) => {
     startDate: Joi.date().iso().optional(),
     endDate: Joi.date().iso().required(),
     status: Joi.string()
-      .valid(...STATUS)
+      .valid(...Object.values(BOOKING_STATUS))
       .optional(),
     price: Joi.number().min(0).optional(),
   });
@@ -38,7 +37,7 @@ exports.validateUpdateBooking = (data) => {
     startDate: Joi.date().iso().optional(),
     endDate: Joi.date().iso().optional(),
     status: Joi.string()
-      .valid(...STATUS)
+      .valid(...Object.values(BOOKING_STATUS))
       .optional(),
     price: Joi.number().min(0).optional(),
     isDeleted: Joi.alternatives().try(Joi.boolean(), Joi.string()).optional(),
@@ -56,7 +55,7 @@ exports.validateGetAllBookingsQuery = (payload) => {
     userId: objectId().optional(),
     bookedBy: objectId().optional(),
     status: Joi.string()
-      .valid(...STATUS)
+      .valid(...Object.values(BOOKING_STATUS))
       .optional(),
 
     minPrice: Joi.number().min(0).optional(),

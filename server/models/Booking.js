@@ -1,26 +1,19 @@
 const mongoose = require("mongoose");
-const { userField } = require("./validObjectId");
+const { companyField, categoryField, userField } = require("./validObjectId");
+const { BOOKING_STATUS } = require("../constants");
 
 const bookingSchema = new mongoose.Schema(
   {
-    companyId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Company",
-      required: true,
-    },
-    categoryId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Category",
-      required: true,
-    },
+    companyId: { ...companyField },
+    categoryId: { ...categoryField },
     userId: { ...userField, required: true },
     bookedBy: { ...userField, required: true },
     startDate: { type: Date, required: true },
     endDate: { type: Date, required: true },
     status: {
       type: String,
-      enum: ["confirmed", "pending", "completed", "cancelled"],
-      default: "pending",
+      enum: [...Object.values(BOOKING_STATUS)],
+      default: BOOKING_STATUS.PENDING,
     },
     noOfDays: { type: Number, required: true },
     price: { type: Number },

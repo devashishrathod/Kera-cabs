@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Booking = require("../../models/Booking");
 const { throwError } = require("../../utils");
+const { BOOKING_STATUS } = require("../../constants");
 
 const safeDate = (v) => {
   if (!v) return null;
@@ -187,13 +188,26 @@ exports.getAllBookings = async (query) => {
     noOfConfirmed: 0,
     noOfComplated: 0,
     noOfCancelled: 0,
+    noOfDutyClosed: 0,
+    noOfInvoiceGenerated: 0,
+    noOfStatementSent: 0,
+    noOfOutstanding: 0,
+    noOfCashReceived: 0,
   };
 
   metricsArr.forEach((m) => {
-    if (m._id === "pending") metrics.noOfPending = m.count;
-    if (m._id === "confirmed") metrics.noOfConfirmed = m.count;
-    if (m._id === "completed") metrics.noOfComplated = m.count;
-    if (m._id === "cancelled") metrics.noOfCancelled = m.count;
+    if (m._id === BOOKING_STATUS.PENDING) metrics.noOfPending = m.count;
+    if (m._id === BOOKING_STATUS.CONFIRMED) metrics.noOfConfirmed = m.count;
+    if (m._id === BOOKING_STATUS.COMPLETED) metrics.noOfComplated = m.count;
+    if (m._id === BOOKING_STATUS.CANCELLED) metrics.noOfCancelled = m.count;
+    if (m._id === BOOKING_STATUS.DUTY_CLOSED) metrics.noOfDutyClosed = m.count;
+    if (m._id === BOOKING_STATUS.INVOICE_GENERATED)
+      metrics.noOfInvoiceGenerated = m.count;
+    if (m._id === BOOKING_STATUS.STATEMENT_SENT)
+      metrics.noOfStatementSent = m.count;
+    if (m._id === BOOKING_STATUS.OUTSTANDING) metrics.noOfOutstanding = m.count;
+    if (m._id === BOOKING_STATUS.CASH_RECEIVED)
+      metrics.noOfCashReceived = m.count;
   });
 
   const monthly = (out.monthly || []).map((x) => ({

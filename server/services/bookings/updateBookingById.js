@@ -3,6 +3,7 @@ const Company = require("../../models/Company");
 const Category = require("../../models/Category");
 const User = require("../../models/User");
 const { throwError, validateObjectId } = require("../../utils");
+const { BOOKING_STATUS } = require("../../constants");
 
 const normalizeStartOfDay = (d) => {
   const date = new Date(d);
@@ -88,7 +89,7 @@ exports.updateBookingById = async (id, payload = 0) => {
     _id: { $ne: id },
     userId: booking.userId,
     isDeleted: false,
-    status: { $ne: "cancelled" },
+    status: { $ne: BOOKING_STATUS.CANCELLED },
     startDate: { $lte: normalizeEndOfDay(end) },
     endDate: { $gte: normalizeStartOfDay(start) },
   });

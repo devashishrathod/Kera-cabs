@@ -5,18 +5,6 @@ const User = require("../../models/User");
 const { throwError, validateObjectId } = require("../../utils");
 const { BOOKING_STATUS } = require("../../constants");
 
-const normalizeStartOfDay = (d) => {
-  const date = new Date(d);
-  date.setHours(0, 0, 0, 0);
-  return date;
-};
-
-const normalizeEndOfDay = (d) => {
-  const date = new Date(d);
-  date.setHours(23, 59, 59, 999);
-  return date;
-};
-
 const diffDays = (start, end) => {
   const startMs = Date.UTC(
     start.getUTCFullYear(),
